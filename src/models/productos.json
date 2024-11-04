@@ -1,15 +1,4 @@
-[{
-  "title": "Mate",
-  "description": "El mas rico",
-  "price": "1500",
-  "img": "Sin Imagen",
-  "code": "abc123",
-  "stock": "150",
-  "category": "Almacen",
-  "status": true,
-  "thumbnails": [],
-  "id": 1
-},
+[
   {
     "title": "Cafe",
     "description": "De Colombia",

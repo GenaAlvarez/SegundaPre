@@ -1,42 +1,29 @@
-//Primero tenes que crearte una instancia de Socket.io: 
+const socket = io();
 
-const socket = io(); 
-
-//Voy a escuchar el evento "productos" y recibir ese array de datos: 
-
-socket.on("productos", (data) => {
-    //console.log(data);
-    renderProductos(data); 
-})
-
-//"contenedorProductos"
-
-//Voy a crear una funciona que se encargue de modificar el DOM para agregar los productitos. 
+socket.on('productos', (data) => {
+    renderProductos(data);
+});
 
 const renderProductos = (productos) => {
-    const constenedorProductos = document.getElementById("contenedorProductos"); 
-    constenedorProductos.innerHTML = ""; 
+    const contenedorProductos = document.getElementById('contenedorProductos');
+    contenedorProductos.innerHTML = '';  // Limpia el contenedor de productos
 
-    productos.forEach(item => {
-        const card = document.createElement("div"); 
-        card.innerHTML = `  <p> ${item.id} </p>
-                            <p> ${item.title} </p>
-                            <p> ${item.price} </p>
-                            <button> Eliminar </button>
-                            `
-        constenedorProductos.appendChild(card); 
+    productos.forEach(item => { // Cambié `productos.array` a `productos`
+        const card = document.createElement('div');
+        card.innerHTML = `
+            <p> ID: ${item.id} </p>
+            <p> Título: ${item.title} </p>
+            <p> Precio: ${item.price} </p>
+            <button> Eliminar </button>
+        `;
+        contenedorProductos.appendChild(card);
 
-        //Vamos a darle vida al boton de eliminar: 
-        card.querySelector("button").addEventListener("click", () => {
-            eliminarProducto(item.id); 
-            //Le voy a pasar el ID del producto
-        })
-    })
-}
+        card.querySelector('button').addEventListener('click', () => {
+            eliminarProducto(item.id);
+        });
+    });
+};
 
-//Aca armamos la funcion para enviar el id al backend: 
 const eliminarProducto = (id) => {
-    socket.emit("eliminarProducto", id); 
-}
-
-//Vincular ese formulario con el idLoco a alguna constante, tomar su value y enviarlo por websockets al backend por medio de un evento. 
+    socket.emit('eliminarProducto', id);
+};
