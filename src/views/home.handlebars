@@ -1,0 +1,14 @@
+<h1>Bienvenido a tu tienda de confianza</h1>
+
+<h2>Estos son todos nuestros productos</h2>
+
+<div class="containerProducts">
+    {{#each productos}}
+    <div class="card">
+        <p>{{this.tittle}} </p>
+        <p>{{this.description}} </p>
+        <p>{{this.price}} </p>
+        <button>Comprar</button>
+    </div>
+    {{/each}}
+</div>
