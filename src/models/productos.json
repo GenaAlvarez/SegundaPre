@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "title": "fideos",
+    "description": "Coccion rapida",
+    "price": 760,
+    "img": "",
+    "code": "2",
+    "stock": 50,
+    "category": "carbohidratos",
+    "status": true,
+    "thumbnails": [],
+    "id": 1
+  },
+  {
+    "title": "arroz",
+    "description": "Largo fino",
+    "price": 900,
+    "img": "",
+    "code": "1",
+    "stock": 5,
+    "category": "carbohidratos",
+    "status": true,
+    "thumbnails": [],
+    "id": 2
+  }
+]

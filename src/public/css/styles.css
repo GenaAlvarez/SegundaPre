@@ -25,8 +25,27 @@
     justify-content: center;
     align-items: center;
     width: 250px;
-    height: 250px;
+    height: 350px;
     background-color: #ffff66;
     border: #e6e600 3px solid;
     
+}
+.formTitle{
+    font-size: 35px;
+    text-align: center;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    gap: 10px;
+    margin: auto;
+}
+#form button {
+    width: 50%;
+    margin: auto;
+}
+#contenedorProductos{
+    display: flex;
+    gap: 10px;
 }

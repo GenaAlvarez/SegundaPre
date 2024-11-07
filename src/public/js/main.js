@@ -10,9 +10,11 @@ const renderProductos = (productos) => {
 
     productos.forEach(item => { 
         const card = document.createElement('div');
+        card.classList.add('card')
         card.innerHTML = `
             <p> ID: ${item.id} </p>
             <p> Título: ${item.title} </p>
+            <p> Descripcion: ${item.description} </p>
             <p> Precio: ${item.price} </p>
             <button> Eliminar </button>
         `;
@@ -31,23 +33,26 @@ const form = document.getElementById('form');
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const id = parseInt(document.getElementById('id').value);
     const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
     const price = parseFloat(document.getElementById('price').value);
+    const code = document.getElementById('code').value;
+    const stock = parseInt(document.getElementById('stock').value);
+    const category = document.getElementById('category').value;
 
-   
-    if (!id || !title || !price) {
-        console.log('ID, título y precio son obligatorios');
+    
+    if (!title || !description || !price || !code || !stock || !category) {
+        console.log('Todos los campos son obligatorios');
         return;
     }
 
-    const nuevoProducto = { id, title, price };
+    const nuevoProducto = { title, description, price, code, stock, category };
 
     console.log('Nuevo producto:', nuevoProducto);  
 
-    
+   
     socket.emit('agregarProducto', nuevoProducto);
 
-  
+    
     form.reset();
 });

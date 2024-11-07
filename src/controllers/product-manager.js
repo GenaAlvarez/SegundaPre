@@ -8,17 +8,17 @@ class ProductManager{
         this.path = path;
     }
 
-    async addProduct({ title, description = "Sin descripción", price, img = "", code, stock = 0, category = "General", thumbnails = [] }) {
+    async addProduct({ title, description, price, img = "", code, stock, category, thumbnails = [] }) {
       try {
           const arrayProductos = await this.leerArchivo();
   
          
-          if (!title || !price) {
-              console.log("Título y precio son obligatorios");
+          if (!title || !price || !description) {
+              console.log("Título, precio y descripcion son obligatorios");
               return;
           }
   
-          if (code && arrayProductos.some(item => item.code === code)) {
+          if (arrayProductos.some(item => item.code === code)) {
               console.log("El código debe ser único");
               return;
           }
