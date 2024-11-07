@@ -1,11 +1,14 @@
-<h2>Productos en tiempo real</h2>
+<h1 class="title">Productos en tiempo real</h1>
 
 <div id="contenedorProductos"></div>
 
-<h2> formulario de productos </h2>
+<h2 class="subTitle">Formulario de productos</h2>
 
 <form id="form" action="">
-
+    <input type="number" id="id" placeholder="ID" required>
+    <input type="text" id="title" placeholder="Título" required>
+    <input type="number" id="price" placeholder="Precio" required>
+    <button type="submit">Agregar</button>
 </form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>

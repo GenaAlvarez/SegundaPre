@@ -6,9 +6,9 @@ socket.on('productos', (data) => {
 
 const renderProductos = (productos) => {
     const contenedorProductos = document.getElementById('contenedorProductos');
-    contenedorProductos.innerHTML = '';  // Limpia el contenedor de productos
+    contenedorProductos.innerHTML = ''; 
 
-    productos.forEach(item => { // Cambié `productos.array` a `productos`
+    productos.forEach(item => { 
         const card = document.createElement('div');
         card.innerHTML = `
             <p> ID: ${item.id} </p>
@@ -27,3 +27,27 @@ const renderProductos = (productos) => {
 const eliminarProducto = (id) => {
     socket.emit('eliminarProducto', id);
 };
+const form = document.getElementById('form');
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const id = parseInt(document.getElementById('id').value);
+    const title = document.getElementById('title').value;
+    const price = parseFloat(document.getElementById('price').value);
+
+   
+    if (!id || !title || !price) {
+        console.log('ID, título y precio son obligatorios');
+        return;
+    }
+
+    const nuevoProducto = { id, title, price };
+
+    console.log('Nuevo producto:', nuevoProducto);  
+
+    
+    socket.emit('agregarProducto', nuevoProducto);
+
+  
+    form.reset();
+});

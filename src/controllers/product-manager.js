@@ -8,41 +8,54 @@ class ProductManager{
         this.path = path;
     }
 
-    async addProduct({title, description, price, img, code, stock, category, thumbnails }) { 
-        try{
-            const arrayProductos = await this.leerArchivo();
-            if (!title || !description || !price || !code || !stock || !category) {
-                console.log("Todos los campos son obligatorios");
-                return;
-              }
-            if(arrayProductos.some(item => item.code === code)){
-                console.log('el codigo debe ser unico');
-                return;
-            }
-            const newProduct = {
-                title,
-                description,
-                price,
-                img,
-                code,
-                stock,
-                category,
-                status: true,
-                thumbnails: thumbnails || []
-              };
-            
-            if(arrayProductos.length > 0){
-                ProductManager.ultId = arrayProductos.reduce((maxId, product) => Math.max(maxId, product.id), 0);
-            }
-
-            newProduct.id = ++ProductManager.ultId;
-            arrayProductos.push(newProduct);
-            await this.guardarArchivo(arrayProductos);
-        }catch(error){
-            console.log('error al agregar el producto');
-            error;   
-        }
-    }
+    async addProduct({ title, description = "Sin descripción", price, img = "", code, stock = 0, category = "General", thumbnails = [] }) {
+      try {
+          const arrayProductos = await this.leerArchivo();
+  
+         
+          if (!title || !price) {
+              console.log("Título y precio son obligatorios");
+              return;
+          }
+  
+          if (code && arrayProductos.some(item => item.code === code)) {
+              console.log("El código debe ser único");
+              return;
+          }
+  
+   
+          const newProduct = {
+              title,
+              description,
+              price,
+              img,
+              code: code || `CODE-${ProductManager.ultId + 1}`, 
+              stock,
+              category,
+              status: true,
+              thumbnails
+          };
+  
+          
+          if (arrayProductos.length > 0) {
+              ProductManager.ultId = arrayProductos.reduce((maxId, product) => Math.max(maxId, product.id), 0);
+          } else {
+              ProductManager.ultId = 0;  
+          }
+  
+          newProduct.id = ++ProductManager.ultId;
+          
+          
+          arrayProductos.push(newProduct);
+          await this.guardarArchivo(arrayProductos);
+  
+          console.log("Producto agregado correctamente:", newProduct);
+          return newProduct;  
+  
+      } catch (error) {
+          console.error("Error al agregar el producto:", error);
+      }
+  }
     async getProducts() {
         try {
           const arrayProductos = await this.leerArchivo();

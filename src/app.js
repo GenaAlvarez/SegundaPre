@@ -44,4 +44,8 @@ io.on('connection', async (socket) => {
         await manager.deleteProduct(id);
         io.sockets.emit('productos', await manager.getProducts());
     });
+    socket.on('agregarProducto', async (producto) => {
+        await manager.addProduct(producto); 
+        io.sockets.emit('productos', await manager.getProducts());
+    });
 });
